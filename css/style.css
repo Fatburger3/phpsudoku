@@ -1,0 +1,17 @@
+html, body {
+    height: 98%;
+    width: 98%;
+}
+
+.puzzle{
+    
+}
+.puzzle_row{
+    
+}
+.puzzle_cell{
+    border: solid 1px black;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
