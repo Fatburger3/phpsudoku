@@ -1,48 +1,37 @@
 <?php
-$blank_puzzle=array(
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0,
-    
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0,
-    
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0,
-    0,0,0,  0,0,0,  0,0,0
-);
-// The array of puzzles to choose from
-$puzzles = array();
-$puzzles[]=array(
-    8,0,0,  0,0,0,  0,0,0,
-    0,0,3,  6,0,0,  0,0,0,
-    0,7,0,  0,9,0,  2,0,0,
-    
-    0,5,0,  0,0,7,  0,0,0,
-    0,0,0,  0,4,5,  7,0,0,
-    0,0,0,  1,0,0,  0,3,0,
-                
-    0,0,1,  0,0,0,  0,6,8,
-    0,0,8,  5,0,0,  0,1,0,
-    0,9,0,  0,0,0,  4,0,0
-);
-$puzzles[]=array(
-    0,9,5,  7,4,3,  8,6,1,
-    4,3,1,  8,6,5,  9,2,7,
-    8,7,6,  1,9,2,  5,4,3,
-    
-    3,8,7,  4,5,9,  2,1,6,
-    6,1,2,  3,8,7,  4,9,5,
-    5,4,9,  2,1,6,  7,3,8,
-    
-    7,6,3,  5,3,4,  1,8,9,
-    9,2,8,  6,7,1,  3,5,4,
-    1,5,4,  9,3,8,  6,7,2
-);
-
-// Set the main puzzle to a random puzzle
-$puzzle = $puzzles[rand(0, count($puzzles) - 1)];
+// Get a random puzzle
+function getRandPuzzle()
+{
+    // The array of puzzles to choose from
+    $puzzles = array();
+    $puzzles[]=array(
+        8,0,0,  0,0,0,  0,0,0,
+        0,0,3,  6,0,0,  0,0,0,
+        0,7,0,  0,9,0,  2,0,0,
+        
+        0,5,0,  0,0,7,  0,0,0,
+        0,0,0,  0,4,5,  7,0,0,
+        0,0,0,  1,0,0,  0,3,0,
+                    
+        0,0,1,  0,0,0,  0,6,8,
+        0,0,8,  5,0,0,  0,1,0,
+        0,9,0,  0,0,0,  4,0,0
+    );
+    $puzzles[]=array(
+        0,9,5,  7,4,3,  8,6,1,
+        4,3,1,  8,6,5,  9,2,7,
+        8,7,6,  1,9,2,  5,4,3,
+        
+        3,8,7,  4,5,9,  2,1,6,
+        6,1,2,  3,8,7,  4,9,5,
+        5,4,9,  2,1,6,  7,3,8,
+        
+        7,6,3,  5,3,4,  1,8,9,
+        9,2,8,  6,7,1,  3,5,4,
+        1,5,4,  9,3,8,  6,7,2
+    );
+    return $puzzles[rand(0, count($puzzles) - 1)];
+}
 
 // Display the puzzle on the form
 function displayPuzzle($puzzle)
@@ -80,10 +69,9 @@ function block($xy)
 // Solve this puzzle array
 function solvePuzzle($puzzle)
 {
-    //$puzzle_copy = $puzzle;
-    $i = 0;
-    
     // Find the first empty cell
+    
+    $i = 0;
     while($puzzle[$i] != 0)
     {
         $i++;
@@ -101,20 +89,6 @@ function solvePuzzle($puzzle)
     //Grab the blocks
     $xb = block($x);
     $yb = block($y);
-    
-    // echo 'selected index: ';
-    // echo $i;
-    // echo '</br>';
-    // echo 'X, Y Cell: ';
-    // echo $x;
-    // echo ', ';
-    // echo $y;
-    // echo '</br>';
-    // echo 'X, Y Block: ';
-    // echo $xb;
-    // echo ', ';
-    // echo $yb;
-    // echo '</br>';
     
     // Now try to fill the cell with a value
     // Accept values 1 thru 9
@@ -168,18 +142,73 @@ function solvePuzzle($puzzle)
     return null;
 }
 
+// $blank_puzzle=array(
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0,
+    
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0,
+    
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0,
+//     0,0,0,  0,0,0,  0,0,0
+// );
+
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sudoku Solver?</title>
+        <title>Sudoku Solver</title>
         <style>
             @import url("css/style.css");
         </style>
     </head>
     <body>
         <h1>Sudoku Solver</h1>
-        <?php displayPuzzle($puzzle); ?>
-        <?php $puzzle=solvePuzzle($puzzle);displayPuzzle($puzzle); ?>
+        <?php
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                $puzzle = array();
+                for($j = 0; $j < 9; $j++)
+                {
+                    for($k = 0; $k < 9; $k++)
+                    {
+                        $i = indexOf($k, $j);
+                        $puzzle[]=$_POST[(string)$i];
+                    }
+                }
+                echo '<div id="submitted"><h2>You submitted:</h2>';
+                displayPuzzle($puzzle);
+                echo '</div><div id="solved"><h2>Solved:</h2>';
+                displayPuzzle(solvePuzzle($puzzle));
+                echo '</div><a href="index.php">Restart</a><hr>';
+            }
+            elseif($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                echo '<form action="index.php" method="post"><table class="puzzle">';
+                    for($j = 0; $j < 9; $j++)
+                    {
+                        echo '<tr class="puzzle_row">';
+                        for($k = 0; $k < 9; $k++)
+                        {
+                            $i = indexOf($k, $j);
+                            $v = $puzzle[$i];
+                            echo '<td class="puzzle_cell"><input type = "text" name="';
+                            echo $i;
+                            if($v != 0)
+                            {
+                                echo '" value="';
+                                echo $v;
+                            }
+                            echo '"/></td>';
+                        }
+                        echo '</tr>';
+                    }
+                    echo '</table><input type="submit" value="solve"/></form>';
+            }
+            
+        ?>
     </body>
 </html>
