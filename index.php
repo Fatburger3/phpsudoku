@@ -77,7 +77,6 @@ function solvePuzzle($puzzle)
         $i++;
         if($i == 81)
         {
-            echo 'solved';
             return $puzzle; //found a solution
         }
     }
@@ -183,7 +182,7 @@ function solvePuzzle($puzzle)
                 displayPuzzle($puzzle);
                 echo '</div><div id="solved"><h2>Solved:</h2>';
                 displayPuzzle(solvePuzzle($puzzle));
-                echo '</div><a href="index.php">Restart</a><hr>';
+                echo '</div><hr><a href="index.php">Restart</a>';
             }
             elseif($_SERVER['REQUEST_METHOD'] === 'GET')
             {
@@ -196,7 +195,7 @@ function solvePuzzle($puzzle)
                         {
                             $i = indexOf($k, $j);
                             $v = $puzzle[$i];
-                            echo '<td class="puzzle_cell"><input type = "text" name="';
+                            echo '<td class="puzzle_cell"><input type="text" size="1" name="';
                             echo $i;
                             if($v != 0)
                             {

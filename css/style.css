@@ -1,6 +1,7 @@
 html, body {
     height: 98%;
     width: 98%;
+    text-align: center;
 }
 
 .puzzle{
@@ -14,4 +15,19 @@ html, body {
     width: 20px;
     height: 20px;
     text-align: center;
+}
+.spacer {
+    display: inline-block;
+    width: 10%;
+}
+#submitted, #solved {
+    text-align: center;
+    display: inline-block;
+    width: 35%;
+}
+#submitted{
+    
+}
+#solved {
+    
 }
