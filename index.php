@@ -131,7 +131,7 @@ function solvePuzzle($puzzle)
         $puzzle[indexOf($x, $y)] = $v;
         $rec = solvePuzzle($puzzle);
         if($rec != null) return $rec;
-        else 
+        else
         {
             $puzzle[$i]=0;
             continue;
@@ -178,16 +178,30 @@ function solvePuzzle($puzzle)
                         $puzzle[]=$_POST[(string)$i];
                     }
                 }
-                echo '<div id="submitted"><h2>You submitted:</h2>';
+                echo '<div class="spacer"></div>';
+                
+                echo '<div id="submitted">';
+                echo '<h2>You submitted:</h2>';
                 displayPuzzle($puzzle);
-                echo '</div><div id="solved"><h2>Solved:</h2>';
+                echo '</div>';
+                
+                echo '<div class="spacer"></div>';
+                
+                echo '<div id="solved">';
+                echo '<h2>Solved:</h2>';
                 displayPuzzle(solvePuzzle($puzzle));
-                echo '</div><hr><a href="index.php">Restart</a>';
+                echo '</div>';
+                
+                echo '<div class="spacer"></div>';
+                
+                echo '<hr><a href="index.php">Restart</a>';
             }
             elseif($_SERVER['REQUEST_METHOD'] === 'GET')
             {
                 $puzzle = getRandPuzzle();
-                echo '<form action="index.php" method="post"><table class="puzzle">';
+                echo '<div align="center">';
+                echo '<form class="puzzle_form" action="index.php" method="post">';
+                echo '<table class="puzzle">';
                     for($j = 0; $j < 9; $j++)
                     {
                         echo '<tr class="puzzle_row">';
@@ -195,7 +209,7 @@ function solvePuzzle($puzzle)
                         {
                             $i = indexOf($k, $j);
                             $v = $puzzle[$i];
-                            echo '<td class="puzzle_cell"><input type="text" size="1" name="';
+                            echo '<td><input class="puzzle_cell" type="text" size="1" name="';
                             echo $i;
                             if($v != 0)
                             {
@@ -206,7 +220,10 @@ function solvePuzzle($puzzle)
                         }
                         echo '</tr>';
                     }
-                    echo '</table><input type="submit" value="solve"/></form>';
+                    echo '</table><input type="submit" value="Solve"/>';
+                    echo '</form>';
+                    echo '</div>';
+                    
             }
             
         ?>

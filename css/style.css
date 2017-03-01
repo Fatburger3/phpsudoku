@@ -4,11 +4,9 @@ html, body {
     text-align: center;
 }
 
-.puzzle{
-    
+.puzzle, .puzzle_form{
 }
 .puzzle_row{
-    
 }
 .puzzle_cell{
     border: solid 1px black;
