@@ -33,21 +33,32 @@ function getRandPuzzle()
     return $puzzles[rand(0, count($puzzles) - 1)];
 }
 
+
 // Display the puzzle on the form
 function displayPuzzle($puzzle)
 {
-    echo '<table class="puzzle">';
+    echo '<table align="center" class="puzzle">';
     $i = 0;
-    for($y = 0; $y < 9; $y++)
+    for($yb = 0; $yb < 3; $yb++)
     {
-        echo '<tr class="puzzle_row">';
-        for($x = 0; $x < 9; $x++)
+        echo '<tr class="puzzle_block_row">';
+        for($xb = 0; $xb < 3; $xb++)
         {
-            echo '<td class="puzzle_cell">';
-            //echo ($puzzle[$i] == 0?' ':$puzzle[$i]);
-            echo ($puzzle[$i]);
-            $i++;
-            echo '</td>';
+            echo '<td class="puzzle_block"><table>';
+            for($y = 0; $y < 3; $y++)
+            {
+                echo '<tr class="puzzle_row">';
+                for($x = 0; $x < 3; $x++)
+                {
+                    echo '<td class="puzzle_cell">';
+                    //echo ($puzzle[$i] == 0?' ':$puzzle[$i]);
+                    echo ($puzzle[$i]);
+                    $i++;
+                    echo '</td>';
+                }
+                echo '</tr>';
+            }
+            echo '</table></td>';
         }
         echo '</tr>';
     }
