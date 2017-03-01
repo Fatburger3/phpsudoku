@@ -187,6 +187,7 @@ function solvePuzzle($puzzle)
             }
             elseif($_SERVER['REQUEST_METHOD'] === 'GET')
             {
+                $puzzle = getRandPuzzle();
                 echo '<form action="index.php" method="post"><table class="puzzle">';
                     for($j = 0; $j < 9; $j++)
                     {
