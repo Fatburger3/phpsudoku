@@ -40,5 +40,22 @@ h2 {
 #solved {
 }
 .button {
-    
+    border: solid 1px blue;
+    background-color: purple;
+    color: white;
+    margin: 5px;
+}
+.button:hover {
+    border: solid 1px green;
+    background-color: purple;
+    color: white;
+    margin: 5px;
+    transition-duration: .5s;
+}
+.button:selected {
+    border: solid 1px green;
+    background-color: red;
+    color: white;
+    margin: 5px;
+    transition-duration: .5s;
 }
