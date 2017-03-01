@@ -163,6 +163,20 @@ function solvePuzzle($puzzle)
         <style>
             @import url("css/style.css");
         </style>
+        <script>
+            function clearInputs()
+            {
+                console.log('test');
+                var inputs = document.getElementsByTagName('input');
+                for (var i = 0; i<inputs.length; i++)
+                {
+                    if(inputs[i].type === 'text')
+                    {
+                        inputs[i].value = '';
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <h1>Sudoku Solver</h1>
@@ -220,7 +234,9 @@ function solvePuzzle($puzzle)
                         }
                         echo '</tr>';
                     }
-                    echo '</table><input type="submit" value="Solve"/>';
+                    echo '</table>';
+                    echo '<button class="button" type="submit">Solve</button>';
+                    echo '<button class="button" onclick="clearInputs(); return false;">Clear</button>';
                     echo '</form>';
                     echo '</div>';
                     
