@@ -8,9 +8,6 @@ html, body {
 h2 {
     text-align: center;
 }
-
-.puzzle, .puzzle_form{
-}
 .puzzle{
     border: outset 5px salmon;
 }
@@ -30,16 +27,12 @@ h2 {
     display: inline-block;
     width: 10%;
 }
-#submitted, #solved {
-    text-align: center;
-    display: inline-block;
-    width: 35%;
-}
-#submitted{
-}
-#solved {
-}
 .button {
+    font: bold 12px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
     border: solid 1px blue;
     background-color: purple;
     color: white;
@@ -58,4 +51,22 @@ h2 {
     color: white;
     margin: 5px;
     transition-duration: .5s;
+}
+#submitted, #solved {
+    text-align: center;
+    display: inline-block;
+    width: 35%;
+}
+#main {
+    height: 100%;
+}
+#checkmark{
+    display: inline-block;
+    width: 64px;
+}
+#submitted{
+}
+#solved {
+}
+.puzzle, .puzzle_form{
 }

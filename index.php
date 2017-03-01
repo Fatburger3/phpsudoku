@@ -84,7 +84,7 @@ function displayPuzzleForm($puzzle)
                 {
                     $v = $puzzle[$i];
                     echo '<td class="puzzle_cell">';
-                    echo '<input  class="puzzle_input_cell" type="text" size="1" name="';
+                    echo '<input class="puzzle_input_cell" type="text" size="1" name="';
                     echo $i;
                     if($v != 0)
                     {
@@ -219,7 +219,6 @@ function solvePuzzle($puzzle)
         <script>
             function clearInputs()
             {
-                console.log('test');
                 var inputs = document.getElementsByTagName('input');
                 for (var i = 0; i<inputs.length; i++)
                 {
@@ -232,6 +231,7 @@ function solvePuzzle($puzzle)
         </script>
     </head>
     <body>
+        <div id="main">
         <h1>Sudoku Solver</h1>
         <?php
             if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -246,13 +246,14 @@ function solvePuzzle($puzzle)
                     }
                 }
                 echo '<div class="spacer"></div>';
-                
                 echo '<div id="submitted">';
                 echo '<h2>You submitted:</h2>';
                 displayPuzzle($puzzle);
                 echo '</div>';
                 
-                echo '<div class="spacer"></div>';
+                echo '<div class="spacer">';
+                echo '<a class="button" href="index.php">Restart</a>';
+                echo '</div>';
                 
                 
                 echo '<div id="solved">';
@@ -261,8 +262,8 @@ function solvePuzzle($puzzle)
                 echo '</div>';
                 
                 echo '<div class="spacer"></div>';
+                echo '<img id="checkmark" src="img/checkmark.png"/>';
                 
-                echo '<hr><a href="index.php">Restart</a>';
             }
             elseif($_SERVER['REQUEST_METHOD'] === 'GET')
             {
@@ -274,5 +275,24 @@ function solvePuzzle($puzzle)
             }
             
         ?>
+        </div>
+        <hr>
+        <table align="center"><tfoot>
+            <tr>
+                <th>
+                    2017 &copy; Carsen Yates.
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Disclaimer: All material above is used for teaching purposes.  Information might be inaccurate.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="../../img/csumb-logo.png" alt="CSUMB Logo"/>
+                </td>
+            </tr>
+        </tfoot></table>
     </body>
 </html>
