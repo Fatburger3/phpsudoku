@@ -12,7 +12,7 @@ h2 {
     border: outset 5px salmon;
 }
 .puzzle_block{
-    border: inset 5px green;
+    border: inset 5px steelblue;
 }
 .puzzle_input_cell, .puzzle_cell{
     border: solid 1px gray;
@@ -33,7 +33,7 @@ h2 {
     background-color: #EEEEEE;
     color: #333333;
     padding: 2px 6px 2px 6px;
-    border: solid 1px blue;
+    border: solid 1px steelblue;
     background-color: purple;
     color: white;
     margin: 5px;
