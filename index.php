@@ -254,6 +254,7 @@ function solvePuzzle($puzzle)
                 
                 echo '<div class="spacer"></div>';
                 
+                
                 echo '<div id="solved">';
                 echo '<h2>Solved:</h2>';
                 displayPuzzle(solvePuzzle($puzzle));
