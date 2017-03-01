@@ -2,7 +2,6 @@
 // Get a random puzzle
 function getRandPuzzle()
 {
-    // The array of puzzles to choose from
     $puzzles = array();
     $puzzles[]=array(
         8,0,0,  0,0,0,  0,0,0,
@@ -30,6 +29,45 @@ function getRandPuzzle()
         9,2,8,  6,7,1,  3,5,4,
         1,5,4,  9,3,8,  6,7,2
     );
+    $puzzles[]=array(
+        0,0,0,  0,0,0,  0,0,0,
+        0,8,9,  4,1,0,  0,0,0,
+        0,0,6,  7,0,0,  1,9,3,
+        
+        2,0,0,  0,0,0,  7,0,0,
+        3,4,0,  6,0,0,  0,1,0,
+        0,0,0,  9,0,0,  0,0,5,
+        
+        0,0,0,  0,2,0,  0,5,0,
+        6,5,0,  0,4,0,  0,2,0,
+        7,3,0,  1,0,0,  0,0,0
+    );
+    $puzzles[]=array(
+        0,0,0,  0,4,0,  0,0,0,
+        5,0,0,  0,0,3,  0,8,0,
+        0,6,0,  0,0,0,  5,2,7,
+        
+        0,0,0,  0,0,0,  0,0,0,
+        0,0,0,  0,3,6,  0,0,0,
+        0,0,7,  0,2,8,  0,6,9,
+        
+        0,2,0,  9,8,0,  0,0,0,
+        3,0,0,  0,1,5,  0,4,0,
+        0,0,0,  0,0,4,  0,7,8
+    );
+    // $puzzles[]=array(
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0,
+        
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0,
+        
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0,
+    //     0,0,0,  0,0,0,  0,0,0
+    // );
     return $puzzles[rand(0, count($puzzles) - 1)];
 }
 
@@ -38,7 +76,6 @@ function getRandPuzzle()
 function displayPuzzle($puzzle)
 {
     echo '<table align="center" class="puzzle">';
-    $i = 0;
     for($yb = 0; $yb < 3; $yb++)
     {
         echo '<tr class="puzzle_block_row">';
@@ -50,10 +87,10 @@ function displayPuzzle($puzzle)
                 echo '<tr class="puzzle_row">';
                 for($x = 0; $x < 3; $x++)
                 {
+                    $i = indexOfBlock($xb, $yb, $x, $y);
                     echo '<td class="puzzle_cell">';
                     //echo ($puzzle[$i] == 0?' ':$puzzle[$i]);
                     echo ($puzzle[$i]);
-                    $i++;
                     echo '</td>';
                 }
                 echo '</tr>';
@@ -82,6 +119,7 @@ function displayPuzzleForm($puzzle)
                 echo '<tr class="puzzle_row">';
                 for($x = 0; $x < 3; $x++)
                 {
+                    $i = indexOfBlock($xb, $yb, $x, $y);
                     $v = $puzzle[$i];
                     echo '<td class="puzzle_cell">';
                     echo '<input class="puzzle_input_cell" type="text" size="1" name="';
@@ -92,7 +130,6 @@ function displayPuzzleForm($puzzle)
                         echo $v;
                     }
                     echo '"/>';
-                    $i++;
                     echo '</td>';
                 }
                 echo '</tr>';
@@ -111,6 +148,11 @@ function displayPuzzleForm($puzzle)
 function indexOf($x, $y)
 {
     return (9 * $y) + $x;
+}
+// Get the index of these x, y, xb, yb coords
+function indexOfBlock($xb, $yb, $x, $y)
+{
+    return indexOf((3*$xb)+$x,(3*$yb)+$y);
 }
 
 // Gets the block # that this cartesian index(x or y) is in
@@ -193,21 +235,6 @@ function solvePuzzle($puzzle)
     // return null to let the previous function in the stack know that we could not solve
     return null;
 }
-
-// $blank_puzzle=array(
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0,
-    
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0,
-    
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0,
-//     0,0,0,  0,0,0,  0,0,0
-// );
-
 ?>
 <!DOCTYPE html>
 <html>
