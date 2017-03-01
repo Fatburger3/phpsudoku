@@ -65,6 +65,48 @@ function displayPuzzle($puzzle)
     echo '</table>';
 }
 
+// Display the puzzle on the form
+function displayPuzzleForm($puzzle)
+{
+    echo '<form class="puzzle_form" action="index.php" method="post">';
+    echo '<table align="center" class="puzzle">';
+    $i = 0;
+    for($yb = 0; $yb < 3; $yb++)
+    {
+        echo '<tr class="puzzle_block_row">';
+        for($xb = 0; $xb < 3; $xb++)
+        {
+            echo '<td class="puzzle_block"><table>';
+            for($y = 0; $y < 3; $y++)
+            {
+                echo '<tr class="puzzle_row">';
+                for($x = 0; $x < 3; $x++)
+                {
+                    $v = $puzzle[$i];
+                    echo '<td class="puzzle_cell">';
+                    echo '<input  class="puzzle_input_cell" type="text" size="1" name="';
+                    echo $i;
+                    if($v != 0)
+                    {
+                        echo '" value="';
+                        echo $v;
+                    }
+                    echo '"/>';
+                    $i++;
+                    echo '</td>';
+                }
+                echo '</tr>';
+            }
+            echo '</table></td>';
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    echo '<button class="button" type="submit">Solve</button>';
+    echo '<button class="button" onclick="clearInputs(); return false;">Clear</button>';
+    echo '</form>';
+}
+
 // Get the index of these x, y coords
 function indexOf($x, $y)
 {
@@ -225,31 +267,8 @@ function solvePuzzle($puzzle)
             {
                 $puzzle = getRandPuzzle();
                 echo '<div align="center">';
-                echo '<form class="puzzle_form" action="index.php" method="post">';
-                echo '<table class="puzzle">';
-                    for($j = 0; $j < 9; $j++)
-                    {
-                        echo '<tr class="puzzle_row">';
-                        for($k = 0; $k < 9; $k++)
-                        {
-                            $i = indexOf($k, $j);
-                            $v = $puzzle[$i];
-                            echo '<td><input class="puzzle_cell" type="text" size="1" name="';
-                            echo $i;
-                            if($v != 0)
-                            {
-                                echo '" value="';
-                                echo $v;
-                            }
-                            echo '"/></td>';
-                        }
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                    echo '<button class="button" type="submit">Solve</button>';
-                    echo '<button class="button" onclick="clearInputs(); return false;">Clear</button>';
-                    echo '</form>';
-                    echo '</div>';
+                displayPuzzleForm($puzzle);
+                echo '</div>';
                     
             }
             
