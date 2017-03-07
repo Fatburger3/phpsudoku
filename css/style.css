@@ -68,5 +68,8 @@ h2 {
 }
 #solved {
 }
+#select_puzzle {
+    display: none;
+}
 .puzzle, .puzzle_form{
 }

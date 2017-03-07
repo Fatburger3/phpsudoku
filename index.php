@@ -17,9 +17,22 @@
                     }
                 }
             }
+            function random_changed()
+            {
+                if(document.getElementById('random_on').checked)
+                {
+                    document.getElementById('select_puzzle').style.display = 'none';
+                    document.getElementById('choose_puzzle').value = 'Random Puzzle';
+                }
+                else
+                {
+                    document.getElementById('select_puzzle').style.display = 'block';
+                    document.getElementById('choose_puzzle').value = 'Select Puzzle';
+                }
+            }
         </script>
     </head>
-    <body>
+    <body onload="random_changed();">
         <div id="main">
         <h1>Sudoku Solver</h1>
         <?php
@@ -35,6 +48,20 @@
                         $puzzle[]=$_POST[(string)$i];
                     }
                 }
+                $flag = 0;
+                for($j = 0; $j < 9; $j++)
+                {
+                    for($k = 0; $k < 9; $k++)
+                    {
+                        $i = indexOf($k, $j);
+                        if(isset($puzzle[$i]) && $puzzle[$i] != 0)
+                        {
+                            $flag = 1;
+                            break 2;
+                        }
+                    }
+                }
+                
                 echo '<div class="spacer"></div>';
                 echo '<div id="submitted">';
                 echo '<h2>You submitted:</h2>';
@@ -48,7 +75,13 @@
                 
                 echo '<div id="solved">';
                 echo '<h2>Solved:</h2>';
-                displayPuzzle(solvePuzzle($puzzle));
+                
+                if($flag == 0){
+                    echo 'ERROR: puzzle was found to be empty';
+                }
+                else{
+                    displayPuzzle(solvePuzzle($puzzle));
+                }
                 echo '</div>';
                 
                 echo '<div class="spacer"></div>';
@@ -63,6 +96,15 @@
                 if(isset($_GET['random'])) $random = $_GET['random'];
                 if(isset($_GET['puzzle'])) $puzzle_index = intval($_GET['puzzle']);
                 
+                if($random == '')
+                {
+                    echo 'ERROR: No value was selected for "Pick random puzzle"';
+                }
+                if($random === 'No' && $_GET['puzzle'] == '')
+                {
+                    echo 'ERROR: No puzzle was selected';
+                }
+                
                 if($random == 'Yes')
                 {
                     $puzzle = getRandPuzzle();
@@ -73,6 +115,8 @@
                 }
                 echo '<div align="center">';
                 displayPuzzleForm($puzzle);
+                echo '<br/>';
+                echo '<br/>';
                 displayPuzzleChooser($random, $puzzle_index);
                 echo '</div>';
                     

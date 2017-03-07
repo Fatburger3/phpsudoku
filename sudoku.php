@@ -183,18 +183,17 @@ function displayPuzzleChooser($random, $puzzle_index)
     echo '<form class="puzzle_chooser" action="index.php" method="get">';
     
     echo 'Pick a random puzzle: ';
-    echo '<input type="radio" name="random" value="Yes"';
+    echo '<input type="radio" id="random_on"  name="random" value="Yes" onclick="random_changed();"';
     if ($random==='Yes') echo 'checked';
     echo '>Yes</input>';
     echo '&nbsp;';
-    echo '<input type="radio" name="random" value="No"';
+    echo '<input id="random_off" type="radio" name="random" value="No" onclick="random_changed();"';
     if ($random==='No') echo 'checked';
     echo '>No</input>';
     
+    echo '<div id="select_puzzle">';
     echo 'Select a puzzle: ';
-    echo '<select id="select_puzzle" name="puzzle" value="';
-    echo $color == ''?'pick':$color;
-    echo '">';
+    echo '<select class="button" id="select_puzzle_box" name="puzzle">';
     global $puzzles_len;
     for($i = 0; $i < $puzzles_len; $i++)
     {
@@ -211,7 +210,8 @@ function displayPuzzleChooser($random, $puzzle_index)
         echo '</option>';
     }
     echo '</select>';
-    echo '<button class="button">Select Puzzle</button>';
+    echo '</div>';
+    echo '<div><input type="submit" id="choose_puzzle" class="button" value="Random Puzzle"/></div>';
     echo '</form>';
 }
 
