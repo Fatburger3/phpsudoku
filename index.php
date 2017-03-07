@@ -57,9 +57,23 @@
             }
             elseif($_SERVER['REQUEST_METHOD'] === 'GET')
             {
-                $puzzle = getRandPuzzle();
+                $random = 'Yes';
+                $puzzle_index = 0;
+                
+                if(isset($_GET['random'])) $random = $_GET['random'];
+                if(isset($_GET['puzzle'])) $puzzle_index = intval($_GET['puzzle']);
+                
+                if($random == 'Yes')
+                {
+                    $puzzle = getRandPuzzle();
+                }
+                else
+                {
+                    $puzzle = getPuzzle($puzzle_index);
+                }
                 echo '<div align="center">';
                 displayPuzzleForm($puzzle);
+                displayPuzzleChooser($random, $puzzle_index);
                 echo '</div>';
                     
             }
