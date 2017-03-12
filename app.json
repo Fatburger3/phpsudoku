@@ -1,0 +1,6 @@
+{
+  "name": "Start on Heroku: PHP",
+  "description": "A PHP sudoku Solver",
+  "repository": "https://github.com/Fatburger3/phpsudoku",
+  "addons": []
+}
