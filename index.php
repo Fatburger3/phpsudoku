@@ -138,7 +138,7 @@
             </tr>
             <tr>
                 <td>
-                    <img src="../../img/csumb-logo.png" alt="CSUMB Logo"/>
+                    <img src="img/csumb-logo.png" alt="CSUMB Logo"/>
                 </td>
             </tr>
         </tfoot></table>
